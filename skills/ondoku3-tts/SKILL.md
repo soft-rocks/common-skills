@@ -135,7 +135,7 @@ unavailable the value is estimated from the character count and still written.
 
 ## Limits
 
-- Text length is 10 to 400 characters server side. The script splits automatically: input over 380 characters is cut at sentence punctuation into segments of at most 380 characters, with a hard split for any single sentence that is longer. Segments are written as `*_001.mp3`, `*_002.mp3` and recorded separately in `index.json`. When ffmpeg is present the segments are also merged into `*_merged.mp3`.
+- Text length is 10 to 400 characters server side. The script splits automatically: input over 380 characters is cut into segments of at most 380 characters at sentence boundaries. Full width stops end a sentence on their own; ASCII stops count only when whitespace follows, so a decimal such as 3.5 does not split. A single sentence longer than the limit is hard-split. Segments are written as `*_001.mp3`, `*_002.mp3` and recorded separately in `index.json`. When ffmpeg is present the segments are also merged into `*_merged.mp3`.
 - The API is rate limited. Do not parallelize it across subagents or threads. Segmentation already runs sequentially with at least three seconds between calls, so do not add another layer of concurrency around it.
 - On a `quota_exceeded` response the script resplits the current segment using the reported remaining budget and retries. When the budget reaches zero, wait for it to reset.
 - This is the undocumented API behind the ondoku3.com front end. Use it for personal automation of functionality the site already offers to visitors, not for bulk or abusive traffic.

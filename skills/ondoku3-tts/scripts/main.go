@@ -26,6 +26,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"unicode"
 	"unicode/utf8"
 )
 
@@ -354,7 +355,7 @@ func main() {
 
 // runJob synthesizes one job and returns the total audio duration it produced.
 func runJob(client *http.Client, csrfToken string, j resolvedJob, pollInterval, pollTimeout time.Duration) (float64, error) {
-	// Split long input on sentence boundaries (. ? ! ;) into chunks of at most 380 runes.
+	// Split long input on sentence boundaries into chunks of at most 380 runes.
 	chunks := splitText(j.Text, 380)
 	if len(chunks) > 1 {
 		fmt.Printf("text split into %d chunks (total %d chars)\n", len(chunks), utf8.RuneCountInString(j.Text))
@@ -624,12 +625,19 @@ func splitText(text string, max int) []string {
 	if utf8.RuneCountInString(text) <= max {
 		return []string{text}
 	}
-	// Split by paragraph first.
+	// Break into sentences. Full width stops end a sentence on their own. ASCII
+	// stops only count when whitespace or the end of the text follows, so a
+	// decimal point or an abbreviation does not split a sentence in half.
 	var sentences []string
 	var cur strings.Builder
-	for _, r := range text {
+	runes := []rune(text)
+	for i, r := range runes {
 		cur.WriteRune(r)
-		if strings.ContainsRune("。！？；\n", r) {
+		end := strings.ContainsRune("。！？；\n", r)
+		if !end && strings.ContainsRune(".!?;", r) {
+			end = i == len(runes)-1 || unicode.IsSpace(runes[i+1])
+		}
+		if end {
 			sentences = append(sentences, cur.String())
 			cur.Reset()
 		}
