@@ -13,10 +13,15 @@ Shared agent skills.
 | Skill | Description |
 |---|---|
 | [`ondoku3-tts`](skills/ondoku3-tts/) | Converts text to mp3 through the ondoku3.com advanced-tts API, with srt subtitles and an index.json cache. |
+| [`unsplash-search`](skills/unsplash-search/) | Searches the Unsplash photo API for candidate images, with attribution and a used-photo ledger. |
 
 ## Setup
 
     cp .env.template .env
+    set -a; . ./.env; set +a
+
+`unsplash-search` needs `UNSPLASH_ACCESS_KEY`. `ondoku3-tts` needs nothing.
+Nothing loads `.env` automatically, so source it as above.
 
 ## Conventions
 

@@ -78,8 +78,18 @@ sequentially and never fan out across subagents or threads.
 ## Environment
 
 Copy `.env.template` to `.env` for local values. `.env` is gitignored and must
-never be committed. Add new variables to `.env.template` with an empty value
-and a short comment.
+never be committed.
+
+`.env.template` is grouped by the skill that reads each variable, under a
+`# --- skills/<name> ---` heading. Add a new variable under its skill's
+heading, with an empty value, a short comment, and whether it is required. A
+skill that needs no configuration still gets a heading saying so.
+
+Nothing loads `.env` for you. A skill reads plain environment variables, since
+reaching up to the repository root would break the rule above about staying
+inside the skill folder. Source it before running one:
+
+    set -a; . "$(git rev-parse --show-toplevel)/.env"; set +a
 
 ## Temporary files
 
