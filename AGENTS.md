@@ -8,6 +8,11 @@ Everything in this repository is written in English: documentation, code,
 comments, identifiers, commit messages, and file names. Generated output
 follows the same rule, regardless of the language the request was written in.
 
+The exception is content that is data rather than prose, where the language is
+the subject. `ondoku3-tts` matches on 。！？； to split sentences, and
+`writing-humanizer` catalogues Chinese phrases it exists to detect. Translating
+either would break it. Instructions around such data stay English.
+
 ## Writing style
 
 These documents are read by people. Keep the prose plain and direct.
@@ -27,9 +32,12 @@ can be removed without losing meaning, remove it.
 
 ## Repository layout
 
-    skills/<name>/          one skill per directory
-    skills/<name>/SKILL.md  frontmatter (name, description) plus usage docs
-    skills/<name>/scripts/  supporting code
+    skills/<name>/            one skill per directory
+    skills/<name>/SKILL.md    frontmatter (name, description) plus usage docs
+    skills/<name>/scripts/     supporting code, when the skill has any
+    skills/<name>/references/  longer material the SKILL.md links to
+
+A skill can be prose only. `writing-humanizer` has no scripts.
 
 ## Skills
 
