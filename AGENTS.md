@@ -9,7 +9,7 @@ comments, identifiers, commit messages, and file names. Generated output
 follows the same rule, regardless of the language the request was written in.
 
 The exception is content that is data rather than prose, where the language is
-the subject. `ondoku3-tts` matches on 。！？； to split sentences, and
+the subject. `edge-tts` matches on 。！？； to split sentences, and
 `writing-humanizer` catalogues Chinese phrases it exists to detect. Translating
 either would break it. Instructions around such data stay English.
 
@@ -63,15 +63,19 @@ Do not loop a command from the shell. Write the job list as JSON under
 `-batch` flag:
 
 ```bash
-cat > /tmp/common-skills/ondoku3-tts/batch.json <<'JSON'
+cat > /tmp/common-skills/<skill-name>/batch.json <<'JSON'
 [
-  {"text": "first line", "voice": "Hugo", "out": "out/001.mp3"},
-  {"text": "second line", "voice": "Anna", "out": "out/002.mp3"}
+  {"text": "first line", "out": "out/001.mp3"},
+  {"text": "second line", "out": "out/002.mp3"}
 ]
 JSON
 
-go run main.go -batch /tmp/common-skills/ondoku3-tts/batch.json
+go run . -batch /tmp/common-skills/<skill-name>/batch.json
 ```
+
+No skill needs this yet. `edge-tts` takes one job and reads long input with
+`-text-file`, splitting it itself. The rule applies the moment a skill wants to
+process a list.
 
 A job file stays inspectable after the run, and long or multiline text avoids
 shell quoting problems. The script owns the loop, so it also owns rate limiting
@@ -103,8 +107,8 @@ inside the skill folder. Source it before running one:
 
 Write scratch files under `/tmp`, never inside the repository. Group them in a
 named subdirectory, `/tmp/common-skills/<skill-name>/`. Skills follow the same
-rule: `ondoku3-tts` writes to `/tmp/common-skills/ondoku3-tts/` unless `-out`
-says otherwise.
+rule: `edge-tts` writes to `/tmp/common-skills/edge-tts/` unless `-out` says
+otherwise.
 
 Never place scratch output in the working tree, where it can be committed by
 accident.

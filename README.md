@@ -12,7 +12,7 @@ Shared agent skills.
 
 | Skill | Description |
 |---|---|
-| [`ondoku3-tts`](skills/ondoku3-tts/) | Converts text to mp3 through the ondoku3.com advanced-tts API, with srt subtitles and an index.json cache. |
+| [`edge-tts`](skills/edge-tts/) | Converts text to speech mp3 through Edge's read-aloud endpoint, with srt subtitles and an index.json cache. No key, no quota. |
 | [`unsplash-search`](skills/unsplash-search/) | Searches the Unsplash photo API for candidate images, with attribution and a used-photo ledger. |
 | [`iconify-svg`](skills/iconify-svg/) | Searches Iconify and downloads icons as SVG, with colour and size applied at download time. |
 | [`text-to-svg`](skills/text-to-svg/) | Renders text as SVG outline paths from a font's glyphs, with configurable size, fill, stroke and spacing. |
