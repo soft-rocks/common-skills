@@ -129,11 +129,3 @@ itself away as readily as machine text.
 An LLM guesses the next word by statistics, so it drifts toward whatever is most
 common. Specific, unusual facts get replaced by generic, positive description.
 Every pattern here is a symptom of that one mechanism.
-
-## Attribution
-
-Distilled from [shyuan/writing-humanizer](https://github.com/shyuan/writing-humanizer),
-MIT licensed, copyright (c) 2026 shyuan. That project in turn draws on [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing),
-its [Chinese counterpart](https://zh.wikipedia.org/wiki/Wikipedia:AI%E7%94%9F%E6%88%90%E6%96%87%E7%9A%84%E7%89%B9%E5%BE%B5),
-[stop-slop](https://github.com/hardikpandya/stop-slop) and
-[humanizer](https://github.com/blader/humanizer).
